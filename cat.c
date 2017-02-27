@@ -68,7 +68,7 @@ int main(int argc, char* argv[])
                 {
                   lineCount++;
                   charLineCount=0;
-						      count = 0;
+		  count = 0;
                  }// new line encounter
 
 		               if(buffer[len]!='\n' && lineNumbersb>0)
