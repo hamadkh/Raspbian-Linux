@@ -1,3 +1,7 @@
+// HAMAD KHAWAJA
+// MYCAT PROGRAM
+// CS-355
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -54,6 +58,7 @@
       while (read(currentFileHndl, & buffer, sizeof buffer) > 0) {
         int len = 0;
         int pl = -1;
+        int sc=0;
         int printLine = 1;
         int printLineb = 1;
         int charLineCount = 0;
@@ -72,6 +77,7 @@
           } // new line encounter
           if (currentLine[0] == '\n' || currentLine[0] == '\r') {
             lc--;
+            sc++;
           }
 
           if (buffer[len] != '\n' && lineNumbersb > 0) {
@@ -83,6 +89,7 @@
                 pl++;
               }
             }
+
             if (count == 0 && pl>-1) {
               printf("%d", lc);
               count++;
@@ -98,32 +105,29 @@
                 if (currentLine[x] != 32 && strlen(currentLine) > 1) //32 space ascii
                 {
                   printLine = 1;
+                  sc=0;
                 }
               }
             }
-
             if (printLine < 0) {
-
               lineCount--;
             }
 
             int z;
-            // if -e is argument
             for (z = 0; z < strlen(currentLine); z++) {
-              if (printLine > 0)
-                printf((delim > 0 && currentLine[z] == '\n' ? "$%c" : "%c"), currentLine[z]);
+              if (printLine > 0 || sc==1){
+                printf((delim > 0 && currentLine[z]== '\n' ? "$%c" : "%c"), currentLine[z]);
+                }
             }
-
           }
 
           // if n is argument
           if (lineNumbers > 0 && buffer[len] == '\n' && printLine > 0) {
             printf("%d", lineCount);
           }
-
         }
         printLine = -1;
-
       }
     }
+    return 0;
   }
