@@ -80,7 +80,7 @@
             sc++;
           }
 
-          if (buffer[len] != '\n' && lineNumbersb > 0) {
+          if (buffer[len] != '\n' && lineNumbersb > 0 && lineNumbers !=1) {
             int k = 0;
             pl = -1;
             for (k = 0; k < strlen(currentLine) - 1; k++) {
