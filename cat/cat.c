@@ -58,33 +58,33 @@
       while (read(currentFileHndl, & buffer, sizeof buffer) > 0) {
         int len = 0;
         int pl = -1;
-        int sc=0;
         int printLine = 1;
         int printLineb = 1;
         int charLineCount = 0;
         int count = 0;
+	int z,x;
+
         for (len = 0; len < strlen(buffer); len++) {
           currentLine[charLineCount] = buffer[len];
-          currentLine[charLineCount + 1] = 0; // build line string,
-          //dont forget null terminate
-          charLineCount++; //next char index
+          currentLine[charLineCount + 1] = 0;
+          charLineCount++;
 
           if (buffer[len] == '\n') {
             lineCount++;
             lc++;
             charLineCount = 0;
             count = 0;
-          } // new line encounter
-          if (currentLine[0] == '\n' || currentLine[0] == '\r') {
+          }
+
+          if (currentLine[0] == '\n') {
             lc--;
-            sc++;
           }
 
           if (buffer[len] != '\n' && lineNumbersb > 0 && lineNumbers !=1) {
             int k = 0;
             pl = -1;
             for (k = 0; k < strlen(currentLine) - 1; k++) {
-              if (currentLine[k] != 32 && strlen(currentLine) > 1) //32 space ascii
+              if (currentLine[k] != 32 && strlen(currentLine) > 1)
               {
                 pl++;
               }
@@ -99,23 +99,21 @@
           if (buffer[len] == '\n') {
             if (trim > 0) // if argument is s
             {
-              int x = 0;
               printLine = -1;
               for (x = 0; x < strlen(currentLine) - 1; x++) {
                 if (currentLine[x] != 32 && strlen(currentLine) > 1) //32 space ascii
                 {
                   printLine = 1;
-                  sc=0;
                 }
               }
             }
+
             if (printLine < 0) {
               lineCount--;
             }
 
-            int z;
             for (z = 0; z < strlen(currentLine); z++) {
-              if (printLine > 0 || sc==1){
+              if (printLine > 0){
                 printf((delim > 0 && currentLine[z]== '\n' ? "$%c" : "%c"), currentLine[z]);
                 }
             }
@@ -125,6 +123,7 @@
           if (lineNumbers > 0 && buffer[len] == '\n' && printLine > 0) {
             printf("%d", lineCount);
           }
+
         }
         printLine = -1;
       }
