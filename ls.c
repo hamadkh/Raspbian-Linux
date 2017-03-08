@@ -12,9 +12,6 @@
 #include <getopt.h>
 #include <stdlib.h>
 
-#define row 100
-#define col 100
-
 int cmp (char **a, char * *b){
 return strcmp(* a,*b);
 }
